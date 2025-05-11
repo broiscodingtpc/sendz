@@ -7,91 +7,128 @@ function createMatrixRain() {
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.zIndex = '-1';
-    canvas.style.opacity = '0.1';
+    canvas.style.opacity = '0.3';
     document.body.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-    const charArray = chars.split('');
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
+    const texts = [
+        'SEND BOBS',
+        'SEND VAGINE',
+        'SEND VAGNE',
+        'SHOW BOOBS',
+        'SHOW VAGINE',
+        'SHOW VAGNE',
+        'SEND NUDES',
+        'SHOW NUDES',
+        'BOOBS PLS',
+        'VAGINE PLS',
+        'SEND TITS',
+        'SHOW TITS',
+        'BOOBS NOW',
+        'VAGINE NOW',
+        'SEND BOOBS',
+        'SHOW BOOBS',
+        'PLS SEND',
+        'PLS SHOW',
+        'NEED BOOBS',
+        'NEED VAGINE'
+    ];
+    const fontSize = 20;
+    const columns = Math.floor(canvas.width / (fontSize * 6));
     const drops = [];
 
-    for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
+    for (let i = 0; i < columns * 1.5; i++) {
+        drops[i] = {
+            y: Math.random() * -canvas.height,
+            speed: 2 + Math.random() * 3,
+            text: texts[Math.floor(Math.random() * texts.length)],
+            opacity: 0.5 + Math.random() * 0.5,
+            x: Math.random() * canvas.width
+        };
     }
 
     function draw() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0F0';
-        ctx.font = fontSize + 'px monospace';
-
+        
         for (let i = 0; i < drops.length; i++) {
-            const text = charArray[Math.floor(Math.random() * charArray.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            const drop = drops[i];
+            ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
+            ctx.font = `bold ${fontSize}px monospace`;
+            ctx.fillText(drop.text, drop.x, drop.y);
 
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
+            drop.y += drop.speed;
+
+            if (drop.y > canvas.height) {
+                drop.y = Math.random() * -100;
+                drop.text = texts[Math.floor(Math.random() * texts.length)];
+                drop.opacity = 0.5 + Math.random() * 0.5;
+                drop.x = Math.random() * canvas.width;
+                drop.speed = 2 + Math.random() * 3;
             }
-            drops[i]++;
         }
     }
 
-    setInterval(draw, 33);
+    setInterval(draw, 20);
 }
 
 // Chat conversation
 const conversation = [
     {
         sender: 'indian',
-        content: `> Initializing connection...
-> Scanning for vulnerabilities...
-> Connection established!`,
+        content: `Hello beautiful lady!
+I am Rajesh from India.
+You are looking very nice in profile picture.`,
         delay: 1000
     },
     {
         sender: 'girl',
-        content: `Who's there?`,
+        content: `Hi Rajesh!
+Thanks for the compliment.`,
         delay: 2000
     },
     {
         sender: 'indian',
-        content: `> Hello beautiful! I am Rajesh from India.
-> I am very good at computer.
-> I can hack anything!`,
+        content: `I am software engineer.
+Very good at computer.
+Making new token called Send Nudes.
+You want to be first investor?`,
         delay: 3000
     },
     {
         sender: 'girl',
-        content: `Oh really? What can you hack?`,
+        content: `Send Nudes? 
+That's an interesting name...`,
         delay: 2000
     },
     {
         sender: 'indian',
-        content: `> I can hack your heart! 
-> *typing furiously*
-> *sweating profusely*`,
+        content: `Yes madam!
+First token for beautiful ladies.
+You send nudes, token go up.
+Very simple business model.`,
         delay: 3000
     },
     {
         sender: 'girl',
-        content: `That's cute... but can you hack my webcam?`,
+        content: `Oh, I see...
+That's quite... creative.`,
         delay: 2000
     },
     {
         sender: 'indian',
-        content: `> *nervous typing*
-> *glasses fogging up*
-> SEND NUDES!`,
+        content: `Please madam,
+SEND NUDES!
+For token success!`,
         delay: 3000
     },
     {
         sender: 'girl',
-        content: `SHOW VAGNE!`,
+        content: `SHOW VAGNE!
+For token growth!`,
         delay: 2000
     }
 ];

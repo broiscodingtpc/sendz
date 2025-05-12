@@ -9,7 +9,39 @@ body {
     background-color: #000;
     color: #0f0;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
 }
 
 .matrix-bg {
@@ -26,18 +58,23 @@ body {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
     padding: 20px;
+    position: relative;
+    z-index: 2;
+    margin: 40px 0;
 }
 
 .terminal {
-    background: #000;
+    background: rgba(0, 0, 0, 0.8);
     border: 2px solid #0f0;
     border-radius: 5px;
     width: 100%;
     max-width: 800px;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    backdrop-filter: blur(5px);
+    margin-bottom: 40px;
 }
 
 .terminal-header {
@@ -141,6 +178,7 @@ body {
     border-radius: 5px;
     max-width: 80%;
     animation: fadeIn 0.5s ease-in;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .message.indian {
@@ -186,4 +224,211 @@ body {
 @keyframes typing {
     from { width: 0 }
     to { width: 100% }
+}
+
+.header-text {
+    text-align: center;
+    font-size: 2em;
+    color: #0f0;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0f0;
+    animation: glitch 1s infinite;
+}
+
+.header-image {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 40px;
+    overflow: hidden;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 3;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.glitch-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border: 2px solid #0f0;
+    transform: translateZ(20px);
+    transition: transform 0.3s ease;
+}
+
+.glitch-image:hover {
+    transform: translateZ(30px) rotateX(5deg);
+}
+
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(0, 255, 0, 0.1) 0%,
+        rgba(0, 255, 0, 0.2) 25%,
+        rgba(0, 255, 0, 0.1) 50%,
+        rgba(0, 255, 0, 0.2) 75%,
+        rgba(0, 255, 0, 0.1) 100%
+    );
+    animation: glitchMove 2s infinite;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.glitch-overlay::before,
+.glitch-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    animation: glitchEffect 3s infinite;
+}
+
+.glitch-overlay::before {
+    left: 2px;
+    animation-delay: -1s;
+}
+
+.glitch-overlay::after {
+    left: -2px;
+    animation-delay: 1s;
+}
+
+@keyframes glitchEffect {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.scan-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.1) 0px,
+        rgba(0, 255, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+
+@keyframes glitchMove {
+    0% { transform: translateX(-5px); }
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+    100% { transform: translateX(-5px); }
+}
+
+.vagne-button {
+    position: relative;
+    padding: 15px 30px;
+    background: transparent;
+    border: 2px solid #0f0;
+    color: #0f0;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.vagne-button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+.button-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(0, 255, 0, 0.1) 0%,
+        rgba(0, 255, 0, 0.2) 25%,
+        rgba(0, 255, 0, 0.1) 50%,
+        rgba(0, 255, 0, 0.2) 75%,
+        rgba(0, 255, 0, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vagne-button:hover .button-glitch {
+    opacity: 1;
+    animation: glitchMove 2s infinite;
+}
+
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: #000;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+    padding: 20px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0f0;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-button:hover {
+    text-shadow: 0 0 10px #0f0;
+}
+
+#vagneVideo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #0f0;
 } 

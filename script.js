@@ -179,4 +179,24 @@ window.addEventListener('load', () => {
 
     // Start the conversation
     startConversation();
+});
+
+function toggleVideo() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('vagneVideo');
+    
+    if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+        video.pause();
+    } else {
+        modal.style.display = 'block';
+        video.play();
+    }
+}
+
+// Close modal when clicking outside the video
+document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        toggleVideo();
+    }
 }); 

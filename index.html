@@ -8,6 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="video-container">
+        <video autoplay muted loop id="background-video">
+            <source src="indian-hacker.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
     <div class="matrix-bg"></div>
     <div class="container">
         <div class="terminal">
@@ -23,6 +29,27 @@
                 <div class="glitch-text">SEND NUDES</div>
                 <div class="sub-text">SHOW VAGNE</div>
                 
+                <div class="header-image">
+                    <div class="header-text">Send bobs show vagne</div>
+                    <img src="https://crimson-traditional-mastodon-846.mypinata.cloud/ipfs/bafkreig3tekzogxsuoenrmzhpntjdphbkrpizecbv72ad2zzeeec5jafyy" alt="VAGNE" class="glitch-image">
+                    <div class="glitch-overlay"></div>
+                    <div class="scan-lines"></div>
+                </div>
+
+                <button class="vagne-button" onclick="toggleVideo()">
+                    <span class="button-text">Click to see vagne</span>
+                    <div class="button-glitch"></div>
+                </button>
+
+                <div id="videoModal" class="video-modal">
+                    <div class="modal-content">
+                        <span class="close-button" onclick="toggleVideo()">&times;</span>
+                        <video id="vagneVideo" autoplay loop>
+                            <source src="https://crimson-traditional-mastodon-846.mypinata.cloud/ipfs/bafkreihww4vmxpnquhilgp47mcpcgz2nnfnxfipjqgza6dopa2ongeieim" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
                 <div class="coming-soon">
                     <div class="coming-soon-item">
                         <span class="blink">[</span> TELEGRAM COMING SOON <span class="blink">]</span>
@@ -40,12 +67,12 @@
                         <div class="chat-container">
                             <div class="ascii-art indian">
                                 <pre>
-    ╭━━━━╮╱╱╱╱╱╭━━━╮
-    ┃╭╮╭╮┃╱╱╱╱╱┃╭━╮┃
-    ╰╯┃┃┣┻━┳━━╮┃╰━╯┃
-    ╱╱┃┃┃╭╮┃━━┫┃╭━━╯
-    ╱╱┃┃┃╰╯┣━━┃┃┃
-    ╱╱╰╯╰━━┻━━╯╰╯
+██████╗  ██████╗ ██████╗ ███████╗
+██╔══██╗██╔═══██╗██╔══██╗██╔════╝
+██████╔╝██║   ██║██████╔╝███████╗
+██╔══██╗██║   ██║██╔══██╗╚════██║
+██████╔╝╚██████╔╝██████╔╝███████║
+╚═════╝  ╚═════╝ ╚═════╝ ╚══════╝
                                 </pre>
                             </div>
                             <div class="chat-messages" id="chatMessages">
@@ -53,12 +80,12 @@
                             </div>
                             <div class="ascii-art girl">
                                 <pre>
-    ╭━━━━╮╱╱╱╱╱╭━━━╮
-    ┃╭╮╭╮┃╱╱╱╱╱┃╭━╮┃
-    ╰╯┃┃┣┻━┳━━╮┃╰━╯┃
-    ╱╱┃┃┃╭╮┃━━┫┃╭━━╯
-    ╱╱┃┃┃╰╯┣━━┃┃┃
-    ╱╱╰╯╰━━┻━━╯╰╯
+██╗   ██╗ █████╗  ██████╗ ███╗   ██╗███████╗
+██║   ██║██╔══██╗██╔════╝ ████╗  ██║██╔════╝
+██║   ██║███████║██║  ███╗██╔██╗ ██║█████╗  
+╚██╗ ██╔╝██╔══██║██║   ██║██║╚██╗██║██╔══╝  
+ ╚████╔╝ ██║  ██║╚██████╔╝██║ ╚████║███████╗
+  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
                                 </pre>
                             </div>
                         </div>

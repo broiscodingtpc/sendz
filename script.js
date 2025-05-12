@@ -199,4 +199,66 @@ document.getElementById('videoModal').addEventListener('click', function(e) {
     if (e.target === this) {
         toggleVideo();
     }
+});
+
+// Audio handling
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('background-audio');
+    audio.volume = 0.5;
+    
+    // Function to unmute and play audio
+    function unmuteAndPlay() {
+        audio.muted = false;
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Audio started playing');
+            }).catch(error => {
+                console.log('Audio play failed:', error);
+                // Try to play again after a short delay
+                setTimeout(() => {
+                    audio.muted = false;
+                    audio.play();
+                }, 1000);
+            });
+        }
+    }
+
+    // Try to play immediately
+    unmuteAndPlay();
+
+    // Try to play on any user interaction
+    const interactionEvents = ['click', 'scroll', 'mousemove', 'keydown', 'touchstart'];
+    
+    interactionEvents.forEach(eventType => {
+        document.addEventListener(eventType, function playOnInteraction() {
+            unmuteAndPlay();
+            // Remove this event listener after first interaction
+            document.removeEventListener(eventType, playOnInteraction);
+        }, { once: true });
+    });
+
+    // Try to play periodically
+    setInterval(unmuteAndPlay, 2000);
+
+    // Try to play when window gains focus
+    window.addEventListener('focus', unmuteAndPlay);
+
+    // Try to play when the page becomes visible
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            unmuteAndPlay();
+        }
+    });
+
+    // Try to play when the page is fully loaded
+    window.addEventListener('load', unmuteAndPlay);
+
+    // Try to play when the page is ready
+    document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete') {
+            unmuteAndPlay();
+        }
+    });
 }); 

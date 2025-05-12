@@ -15,6 +15,9 @@
         <div class="video-overlay"></div>
     </div>
     <div class="matrix-bg"></div>
+    <audio id="background-audio" autoplay loop playsinline preload="auto" muted>
+        <source src="https://crimson-traditional-mastodon-846.mypinata.cloud/ipfs/bafkreifbx44qs3aa5yxojh6uxae6b3azlejj74iejiwtjzc7ycpri4pkpi" type="audio/ogg">
+    </audio>
     <div class="container">
         <div class="terminal">
             <div class="terminal-header">
@@ -95,6 +98,16 @@
             </div>
         </div>
     </div>
+    <script>
+        // Try to play audio immediately when page loads
+        window.onload = function() {
+            const audio = document.getElementById('background-audio');
+            audio.muted = false;
+            audio.play().catch(function(error) {
+                console.log("Initial autoplay failed:", error);
+            });
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 

@@ -496,4 +496,22 @@ body {
 .telegram-button:hover .button-glitch {
     opacity: 1;
     animation: glitchMove 2s infinite;
+}
+
+.twitter-button {
+    border-color: #0f0;
+    color: #0f0;
+}
+
+.twitter-button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.twitter-icon {
+    margin-left: 10px;
+    font-size: 1.2em;
+    vertical-align: middle;
+    display: inline-block;
+    height: 1em;
 } 

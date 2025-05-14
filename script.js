@@ -311,4 +311,17 @@ window.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'g') {
         triggerGlitchOut();
     }
-}); 
+});
+
+function copyCA() {
+    const caValue = document.getElementById('caValue').innerText;
+    navigator.clipboard.writeText(caValue).then(() => {
+        const copyButton = document.querySelector('.copy-button');
+        copyButton.innerText = 'COPIED!';
+        setTimeout(() => {
+            copyButton.innerText = 'COPY';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+} 

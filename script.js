@@ -36,17 +36,31 @@ function createMatrixRain() {
         'NEED BOOBS',
         'NEED VAGINE'
     ];
+    const asciiBoobs = [
+        '(.)(.)',
+        'ʕ •ᴥ•ʔ',
+        '(. Y .)',
+        '(.)( .)',
+        '(. )( .)',
+        '(.)(.)',
+        '(.Y.)',
+        '(.)(.)',
+        '(.)(.)',
+        '(.)(.)'
+    ];
     const fontSize = 20;
     const columns = Math.floor(canvas.width / (fontSize * 6));
     const drops = [];
 
     for (let i = 0; i < columns * 1.5; i++) {
+        let isBoobs = Math.random() < 0.12; // 12% șansă să fie boobs
         drops[i] = {
             y: Math.random() * -canvas.height,
             speed: 2 + Math.random() * 3,
-            text: texts[Math.floor(Math.random() * texts.length)],
+            text: isBoobs ? asciiBoobs[Math.floor(Math.random() * asciiBoobs.length)] : texts[Math.floor(Math.random() * texts.length)],
             opacity: 0.5 + Math.random() * 0.5,
-            x: Math.random() * canvas.width
+            x: Math.random() * canvas.width,
+            isBoobs: isBoobs
         };
     }
 
@@ -56,15 +70,16 @@ function createMatrixRain() {
         
         for (let i = 0; i < drops.length; i++) {
             const drop = drops[i];
-            ctx.fillStyle = `rgba(0, 255, 0, ${drop.opacity})`;
-            ctx.font = `bold ${fontSize}px monospace`;
+            ctx.fillStyle = drop.isBoobs ? 'rgba(255, 0, 255, ' + drop.opacity + ')' : `rgba(0, 255, 0, ${drop.opacity})`;
+            ctx.font = drop.isBoobs ? `bold ${fontSize + 6}px monospace` : `bold ${fontSize}px monospace`;
             ctx.fillText(drop.text, drop.x, drop.y);
 
             drop.y += drop.speed;
 
             if (drop.y > canvas.height) {
                 drop.y = Math.random() * -100;
-                drop.text = texts[Math.floor(Math.random() * texts.length)];
+                drop.isBoobs = Math.random() < 0.12;
+                drop.text = drop.isBoobs ? asciiBoobs[Math.floor(Math.random() * asciiBoobs.length)] : texts[Math.floor(Math.random() * texts.length)];
                 drop.opacity = 0.5 + Math.random() * 0.5;
                 drop.x = Math.random() * canvas.width;
                 drop.speed = 2 + Math.random() * 3;
@@ -261,4 +276,39 @@ document.addEventListener('DOMContentLoaded', function() {
             unmuteAndPlay();
         }
     });
+});
+
+// Glitch out effect
+function triggerGlitchOut(duration = 3000) {
+    const overlay = document.getElementById('glitchOverlay');
+    if (!overlay) return;
+    // Mesaje random
+    const messages = [
+        ['NO SIGNAL SEND BOBS'],
+        ['LOST SIGNAL SHOW VAGNE'],
+        ["IF YOU DON'T SEND YOU HAVE TO BUY THE COIN"]
+    ];
+    const chosen = messages[Math.floor(Math.random() * messages.length)];
+    const container = overlay.querySelector('.glitch-no-signal');
+    container.innerHTML = chosen.map(msg => `<span class='glitch-big-text'>${msg}</span>`).join('');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }, duration);
+}
+
+// Poți declanșa glitch-out random la fiecare 30-60 secunde
+setInterval(() => {
+    if (Math.random() < 0.25) { // 25% șansă la fiecare interval
+        triggerGlitchOut(2200 + Math.random() * 1800);
+    }
+}, 40000);
+
+// Sau la apăsarea tastei G pentru test
+window.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'g') {
+        triggerGlitchOut();
+    }
 }); 
